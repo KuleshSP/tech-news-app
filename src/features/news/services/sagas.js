@@ -13,10 +13,12 @@ function* fetchData(action) {
 
   if (isAuthorized) {
     try {
-      const response = yield call(api.getNews, pageSize, page);
+      const response = yield call(api.getNews, {
+        pageSize, page
+      });
 
-      if(response.status !== 'error') {
-        yield put(actions.mountPageSucceed(response));
+      if (response.status !== 'error') {
+        yield put(actions.mountPageSucceed(response.data));
       } else {
         throw new Error(response.message)
       }

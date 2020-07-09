@@ -14,9 +14,12 @@ export const actions = {
       payload: values
     }
   },
-  authorizationRequested() {
+  authorizationRequested(credentials) {
     return {
-      type: types.AUTHORIZATION_REQUESTED
+      type: types.AUTHORIZATION_REQUESTED,
+      payload: {
+        credentials
+      }
     };
   },
   authorizationSucceed() {

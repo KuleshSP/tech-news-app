@@ -6,21 +6,19 @@ import storageSession from 'redux-persist/lib/storage';
 
 const initialState = {
   userName: '',
-  password: '',
   pending: false,
   isAuthorized: false,
-  error: false
+  error: false,
 };
 const reducer = (state = initialState, action) => {
   let { type, payload } = action;
 
   switch (type) {
     case types.SET_CREDENTIALS:
-      const { userName, password } = payload;
+      const { userName } = payload;
 
       return R.mergeRight(state, {
         userName,
-        password
       });
 
     case types.AUTHORIZATION_REQUESTED:
@@ -33,7 +31,7 @@ const reducer = (state = initialState, action) => {
     case types.AUTHORIZATION_SUCCEED:
       return R.mergeRight(state, {
         isAuthorized: true,
-        pending: false
+        pending: false,
       });
 
     case types.AUTHORIZATION_FAILED:

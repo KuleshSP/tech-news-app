@@ -29,8 +29,8 @@ const Authorization = props => {
         <h1>Welcome</h1>
       </div>
       <Form
-        onSubmit={() => authorizationRequested()}
-        render={({ handleSubmit, form, submitting, pristine, values }) => (
+        onSubmit={(values) => authorizationRequested(values)}
+        render={({ handleSubmit, form, submitting, pristine }) => (
           <form className={classes.form} onSubmit={handleSubmit}>
             <FormSpy
               onChange={form => {
@@ -54,7 +54,7 @@ const Authorization = props => {
               >
                 {({ input }) => (
                   <div>
-                    <Input {...input} type="text" placeholder="Password" label="Password" required={true} />
+                    <Input {...input} type="password" placeholder="Password" label="Password" required={true} />
                   </div>
                 )}
               </Field>

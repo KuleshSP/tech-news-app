@@ -1,16 +1,17 @@
 import { put, call, all, takeEvery, delay } from "redux-saga/effects";
 import { actions, types } from "./actionsCreators.js";
 import history from 'features/_main/app/history.js';
+import api from './api.js';
 
-function* authorization() {
+function* authorization(action) {
+  const { name, password } = action.payload;
+
   try {
-    yield delay(1000);
-    yield call(() => {
-      return {
-        data: 'authorization_succeeded'
-      }
-    });
+    yield delay(1000); //backend response emulation
+    const response = yield call(api.login, name, password);
 
+    sessionStorage.setItem('token', response.token);
+    
     yield put(actions.authorizationSucceed());
   } catch (error) {
     console.error(error);
